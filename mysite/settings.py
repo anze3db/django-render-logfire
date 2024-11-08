@@ -131,6 +131,38 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Logging
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {
+            "format": '[{asctime}] {levelname} "{name}" {message}',
+            "style": "{",
+            "datefmt": "%d/%b/%Y %H:%M:%S",  # match Django server time format
+        },
+    },
+    "handlers": {
+        "console": {"class": "logging.StreamHandler", "formatter": "verbose"},
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+            "level": os.environ.get("DJANGO_LOG_LEVEL", default="INFO"),
+        },
+        "mysite": {
+            "handlers": ["console"],
+            "level": os.environ.get("MYSITE_LOG_LEVEL", default="INFO"),
+        },
+        # "django.db.backends": {
+        #     "handlers": ["console"],
+        #     "level": "DEBUG",
+        #     "propagate": False,
+        # },
+    },
+}
+
 LOGFIRE_TOKEN = os.environ.get("LOGFIRE_TOKEN")
 if LOGFIRE_TOKEN:
     logfire.configure()
