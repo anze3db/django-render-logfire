@@ -131,6 +131,11 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+LOGFIRE_TOKEN = os.environ.get("LOGFIRE_TOKEN")
+if LOGFIRE_TOKEN:
+    logfire.configure()
+    logfire.instrument_django()
+
 # Logging
 
 LOGGING = {
@@ -162,8 +167,3 @@ LOGGING = {
         # },
     },
 }
-
-LOGFIRE_TOKEN = os.environ.get("LOGFIRE_TOKEN")
-if LOGFIRE_TOKEN:
-    logfire.configure()
-    logfire.instrument_django()
