@@ -22,6 +22,14 @@ from prefect.deployments import run_deployment
 from homepage import views as homepage_views
 
 
+def run_prefect():
+    run_deployment(
+        "scan-repositories-for-organization/scan-repositories-for-organization-deployment",
+        parameters={"organization_id": 1},
+        timeout=0,  # Prevents waiting for the nested flow to finish
+    )
+
+
 def trigger_error(request):
     division_by_zero = 1 / 0
 
