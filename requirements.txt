@@ -536,3 +536,5 @@ zipp==3.20.2
 # setuptools
 # setuptools
 gunicorn==23.0.0
+
+dj_database_url
